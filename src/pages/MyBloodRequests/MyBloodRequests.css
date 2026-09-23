@@ -1,0 +1,299 @@
+﻿/* ========== My Requests Page ========== */
+.myreq-page {
+  min-height: 80vh;
+  background-color: #f7f9fa;
+  padding: 40px 24px 60px;
+}
+
+.myreq-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ========== Header ========== */
+.myreq-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.myreq-header h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+}
+
+.myreq-header p {
+  font-size: 0.92rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.myreq-new-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background-color: #b91c1c;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.2);
+  white-space: nowrap;
+}
+
+.myreq-new-btn:hover {
+  background-color: #991b1b;
+  transform: translateY(-1px);
+}
+
+/* ========== Tabs ========== */
+.myreq-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 28px;
+}
+
+.myreq-tab {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.myreq-tab:hover {
+  color: #b91c1c;
+}
+
+.myreq-tab.active {
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.myreq-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #b91c1c;
+  border-radius: 2px;
+}
+
+/* ========== Cards Grid ========== */
+.myreq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.myreq-card {
+  background: #ffffff;
+  border: 1px solid #f1f5f9;
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: box-shadow 0.2s ease;
+}
+
+.myreq-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Card Top */
+.myreq-card-top {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.myreq-blood-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  background-color: #f1f5f9;
+  color: #64748b;
+  border: 2px solid #e2e8f0;
+}
+
+.myreq-blood-badge.urgent {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+.myreq-card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.myreq-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.myreq-status-tag {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.myreq-status-tag.active {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.myreq-status-tag.completed {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.myreq-status-tag.cancelled {
+  background-color: #fef2f2;
+  color: #b91c1c;
+}
+
+.myreq-date-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.myreq-hospital-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 2px 0 0 0;
+}
+
+.myreq-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+/* Stats Row */
+.myreq-stats-row {
+  display: flex;
+  gap: 28px;
+}
+
+.myreq-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.myreq-stat-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.myreq-stat-value {
+  font-size: 0.92rem;
+  color: #475569;
+  font-weight: 500;
+}
+
+.myreq-stat-value strong {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+/* Actions */
+.myreq-card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.myreq-btn-primary {
+  flex: 1;
+  padding: 10px 16px;
+  background-color: #b91c1c;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.myreq-btn-primary:hover {
+  background-color: #991b1b;
+}
+
+.myreq-btn-outline {
+  flex: 1;
+  padding: 10px 16px;
+  background-color: #ffffff;
+  color: #b91c1c;
+  border: 1.5px solid #b91c1c;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.myreq-btn-outline:hover {
+  background-color: #fef2f2;
+}
+
+.myreq-btn-outline.full-width {
+  width: 100%;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .myreq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .myreq-header {
+    flex-direction: column;
+  }
+
+  .myreq-tabs {
+    overflow-x: auto;
+  }
+}

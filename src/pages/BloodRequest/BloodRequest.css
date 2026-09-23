@@ -1,0 +1,306 @@
+﻿/* ========== Blood Request Page ========== */
+.breq-page {
+  min-height: 80vh;
+  background-color: #f7f9fa;
+  padding: 40px 24px 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.breq-card {
+  width: 100%;
+  max-width: 640px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+  padding: 48px 40px;
+}
+
+/* ========== Header ========== */
+.breq-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.breq-header h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+}
+
+.breq-header p {
+  font-size: 0.92rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ========== Error ========== */
+.breq-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #b91c1c;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+/* ========== Form ========== */
+.breq-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.breq-section-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 8px 0 0 0;
+  padding-top: 8px;
+}
+
+/* Row */
+.breq-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+/* Field */
+.breq-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.breq-field label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.breq-field input,
+.breq-field select,
+.breq-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #1e293b;
+  background-color: #ffffff;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.breq-field input::placeholder,
+.breq-field textarea::placeholder {
+  color: #94a3b8;
+}
+
+.breq-field input:focus,
+.breq-field select:focus,
+.breq-field textarea:focus {
+  border-color: #b91c1c;
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.08);
+  outline: none;
+}
+
+.breq-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.breq-field textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* Location Input */
+.breq-location-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.breq-location-input:focus-within {
+  border-color: #b91c1c;
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.08);
+}
+
+.breq-location-icon {
+  margin-left: 14px;
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.breq-location-input input {
+  border: none;
+  box-shadow: none;
+  padding-left: 10px;
+}
+
+.breq-location-input input:focus {
+  border: none;
+  box-shadow: none;
+}
+
+/* ========== Emergency Toggle ========== */
+.breq-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border: 1px solid #f1f5f9;
+  border-radius: 10px;
+  background-color: #fafbfc;
+  gap: 16px;
+}
+
+.breq-toggle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.breq-toggle-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.breq-toggle-desc {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.breq-toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.breq-toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.breq-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e1;
+  border-radius: 26px;
+  transition: background-color 0.3s ease;
+}
+
+.breq-toggle-slider::before {
+  content: '';
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.breq-toggle-switch input:checked + .breq-toggle-slider {
+  background-color: #b91c1c;
+}
+
+.breq-toggle-switch input:checked + .breq-toggle-slider::before {
+  transform: translateX(22px);
+}
+
+/* ========== Actions ========== */
+.breq-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.breq-cancel-btn {
+  padding: 12px 28px;
+  background-color: #ffffff;
+  color: #b91c1c;
+  border: 1.5px solid #b91c1c;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.breq-cancel-btn:hover {
+  background-color: #fef2f2;
+}
+
+.breq-submit-btn {
+  padding: 12px 28px;
+  background-color: #b91c1c;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.2);
+}
+
+.breq-submit-btn:hover {
+  background-color: #991b1b;
+  transform: translateY(-1px);
+}
+
+.breq-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 640px) {
+  .breq-card {
+    padding: 32px 20px;
+  }
+
+  .breq-row {
+    grid-template-columns: 1fr;
+  }
+
+  .breq-actions {
+    flex-direction: column-reverse;
+  }
+
+  .breq-cancel-btn,
+  .breq-submit-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

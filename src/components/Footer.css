@@ -1,0 +1,50 @@
+.bloodlink-footer {
+  background-color: #ffffff;
+  border-top: 1px solid #f1f5f9;
+  padding: 24px;
+}
+
+.footer-inner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-left-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-brand-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #b91c1c;
+}
+
+.footer-copyright {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.footer-right-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-right-links a {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  transition: color 0.2s ease;
+}
+
+.footer-right-links a:hover {
+  color: #b91c1c;
+}

@@ -1,0 +1,177 @@
+.bloodlink-navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.navbar-inner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bloodlink-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background-color: #fef2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-brand-text {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #b91c1c;
+  letter-spacing: -0.5px;
+}
+
+.nav-center-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.bloodlink-nav-item {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #475569;
+  padding: 6px 0;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.bloodlink-nav-item:hover, .bloodlink-nav-item.active {
+  color: #b91c1c;
+}
+
+.bloodlink-nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background-color: #b91c1c;
+  border-radius: 2px;
+}
+
+.nav-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-link-login {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #334155;
+  padding: 6px 12px;
+  transition: color 0.2s ease;
+}
+
+.btn-link-login:hover {
+  color: #b91c1c;
+}
+
+.btn-pill-register {
+  background-color: #b91c1c;
+  color: #ffffff;
+  padding: 8px 22px;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: background-color 0.2s ease;
+}
+
+.btn-pill-register:hover {
+  background-color: #991b1b;
+}
+
+.nav-user-logged {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-dash-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #b91c1c;
+  background-color: #fef2f2;
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+
+.btn-nav-logout {
+  background: none;
+  border: none;
+  color: #64748b;
+}
+
+.btn-nav-logout:hover {
+  color: #b91c1c;
+}
+
+.btn-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #1e293b;
+}
+
+@media (max-width: 850px) {
+  .nav-center-links, .nav-auth-buttons {
+    display: none;
+  }
+  .btn-mobile-toggle {
+    display: block;
+  }
+}
+
+.mobile-nav-menu {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  padding: 16px 24px;
+  border-top: 1px solid #f1f5f9;
+  gap: 12px;
+}
+
+.mobile-nav-item {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #334155;
+  padding: 8px 0;
+}
+
+.mobile-nav-item.active {
+  color: #b91c1c;
+}
+
+.text-center {
+  text-align: center;
+  display: block;
+}

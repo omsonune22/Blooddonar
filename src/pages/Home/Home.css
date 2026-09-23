@@ -1,0 +1,267 @@
+.bloodlink-home-wrapper {
+  width: 100%;
+  background-color: #f7f9fa;
+  color: #1e293b;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ========== Hero Section ========== */
+.bloodlink-hero-section {
+  padding: 60px 24px 80px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bloodlink-hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.hero-text-content {
+  flex: 1;
+  max-width: 540px;
+}
+
+.hero-main-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+  margin-bottom: 20px;
+}
+
+.hero-description {
+  font-size: 1.05rem;
+  color: #64748b;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+/* Hero CTA Buttons */
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-find-donors {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #b91c1c;
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.2);
+}
+
+.btn-find-donors:hover {
+  background-color: #991b1b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(185, 28, 28, 0.3);
+}
+
+.btn-register-donor {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #ffffff;
+  color: #b91c1c;
+  border: 1.5px solid #b91c1c;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.btn-register-donor:hover {
+  background-color: #fef2f2;
+  transform: translateY(-1px);
+}
+
+/* Right 3D Card Graphic */
+.hero-graphic-card {
+  flex: 1;
+  max-width: 560px;
+  width: 100%;
+}
+
+.graphic-inner-container {
+  background: #eef2f6;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-3d-image {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ========== Feature Cards Section ========== */
+.bloodlink-features-section {
+  padding: 0 24px 80px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.feature-item-card {
+  background: #ffffff;
+  padding: 36px 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.feature-icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #fef2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon-red {
+  color: #b91c1c;
+}
+
+.feature-item-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.feature-item-card p {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ========== Statistics Section ========== */
+.bloodlink-stats-section {
+  background-color: #ffffff;
+  padding: 60px 24px;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.stats-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  gap: 40px;
+}
+
+.stat-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #b91c1c;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 992px) {
+  .bloodlink-hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-cta-group {
+    justify-content: center;
+  }
+
+  .features-container {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-graphic-card {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-main-title {
+    font-size: 2.4rem;
+  }
+
+  .stats-container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .bloodlink-hero-section {
+    padding: 40px 16px 60px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-main-title {
+    font-size: 2rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn-find-donors,
+  .btn-register-donor {
+    width: 100%;
+    justify-content: center;
+  }
+}

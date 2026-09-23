@@ -1,0 +1,11 @@
+/* Custom App Root Styles */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-light);
+}
+
+.main-content {
+  flex: 1;
+}
