@@ -1,8 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Footer.css';
 
 export default function Footer() {
+  const location = useLocation();
+
+  // Hide footer on dashboard for clean app layout without scroll collisions
+  if (location.pathname === '/dashboard') {
+    return null;
+  }
   return (
     <footer className="bloodlink-footer">
       <div className="footer-inner-container">

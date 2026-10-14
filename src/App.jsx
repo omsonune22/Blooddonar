@@ -1,13 +1,16 @@
-﻿import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
+import { NotificationProvider } from './context/NotificationContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ProtectedRoute from './components/ProtectedRoute';
 
-// 12 Separate Pages
+// 12 Separate Pages + VerifyEmail
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import DonorRegistration from './pages/DonorRegistration/DonorRegistration';
+import VerifyEmail from './pages/VerifyEmail/VerifyEmail';
 import Dashboard from './pages/Dashboard/Dashboard';
 import DonorProfile from './pages/DonorProfile/DonorProfile';
 import SearchDonors from './pages/SearchDonors/SearchDonors';
@@ -22,29 +25,65 @@ import './App.css';
 
 export default function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="app-container">
-          <Navbar />
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<DonorRegistration />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/profile" element={<DonorProfile />} />
-              <Route path="/search" element={<SearchDonors />} />
-              <Route path="/request" element={<BloodRequest />} />
-              <Route path="/my-requests" element={<MyBloodRequests />} />
-              <Route path="/donor/:id" element={<DonorDetails />} />
-              <Route path="/messages" element={<Messages />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/contact" element={<ContactUs />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </Router>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <NotificationProvider>
+          <Router>
+            <div className="app-container">
+            <Navbar />
+            <main className="main-content">
+              <Routes>
+                {/* Public Routes */}
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<DonorRegistration />} />
+                <Route path="/verify-email" element={<VerifyEmail />} />
+
+                {/* Protected Routes (Require Authentication and Verified Email) */}
+                <Route path="/dashboard" element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                } />
+                <Route path="/profile" element={
+                  <ProtectedRoute>
+                    <DonorProfile />
+                  </ProtectedRoute>
+                } />
+                <Route path="/search" element={
+                  <ProtectedRoute>
+                    <SearchDonors />
+                  </ProtectedRoute>
+                } />
+                <Route path="/request" element={
+                  <ProtectedRoute>
+                    <BloodRequest />
+                  </ProtectedRoute>
+                } />
+                <Route path="/my-requests" element={
+                  <ProtectedRoute>
+                    <MyBloodRequests />
+                  </ProtectedRoute>
+                } />
+                <Route path="/donor/:id" element={
+                  <ProtectedRoute>
+                    <DonorDetails />
+                  </ProtectedRoute>
+                } />
+                <Route path="/messages" element={
+                  <ProtectedRoute>
+                    <Messages />
+                  </ProtectedRoute>
+                } />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </Router>
+        </NotificationProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }

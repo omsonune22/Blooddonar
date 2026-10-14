@@ -1,26 +1,30 @@
-﻿/* ========== Contact Page ========== */
+/* ========== Contact Page ========== */
 .contact-page {
   width: 100%;
-  background-color: #f7f9fa;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* ========== Header ========== */
 .contact-header {
   text-align: center;
   padding: 60px 24px 40px;
-  background-color: #ffffff;
+  background-color: var(--surface);
+  transition: background-color 0.2s ease;
 }
 
 .contact-header h1 {
   font-size: 2rem;
   font-weight: 800;
-  color: #b91c1c;
+  color: var(--primary);
   margin: 0 0 12px 0;
+  transition: color 0.2s ease;
 }
 
 .contact-header p {
   font-size: 0.95rem;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.6;
   max-width: 520px;
   margin: 0 auto;
@@ -28,7 +32,7 @@
 
 /* ========== Container ========== */
 .contact-container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 40px 24px 80px;
 }
@@ -42,17 +46,18 @@
 
 /* ========== Get in Touch Card ========== */
 .contact-info-card {
-  background: #ffffff;
-  border: 1px solid #f1f5f9;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 32px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .contact-info-card h2 {
   font-size: 1.25rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text-primary);
   margin: 0 0 24px 0;
 }
 
@@ -73,29 +78,25 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #fef2f2;
-  color: #b91c1c;
+  background-color: var(--primary-subtle);
+  color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.contact-info-icon.email {
-  background-color: #fef2f2;
-  color: #b91c1c;
-}
-
+.contact-info-icon.email,
 .contact-info-icon.location {
-  background-color: #fef2f2;
-  color: #b91c1c;
+  background-color: var(--primary-subtle);
+  color: var(--primary);
 }
 
 .contact-info-label {
   display: block;
   font-size: 0.78rem;
   font-weight: 700;
-  color: #b91c1c;
+  color: var(--primary);
   margin-bottom: 2px;
 }
 
@@ -103,35 +104,36 @@
   display: block;
   font-size: 0.92rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text);
 }
 
 /* Map */
 .contact-map {
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #f1f5f9;
+  border: 1px solid var(--border);
 }
 
 /* ========== Send Message Card ========== */
 .contact-form-card {
-  background: #ffffff;
-  border: 1px solid #f1f5f9;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 32px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .contact-form-card h2 {
   font-size: 1.25rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text-primary);
   margin: 0 0 24px 0;
 }
 
 .contact-success {
-  background-color: #dcfce7;
-  color: #15803d;
+  background-color: var(--status-available-bg);
+  color: var(--status-available-text);
   padding: 12px 16px;
   border-radius: 10px;
   font-weight: 600;
@@ -161,31 +163,31 @@
 .contact-field label {
   font-size: 0.85rem;
   font-weight: 700;
-  color: #334155;
+  color: var(--text-secondary);
 }
 
 .contact-field input,
 .contact-field textarea {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--input-border);
   border-radius: 8px;
   font-size: 0.9rem;
-  color: #1e293b;
-  background-color: #ffffff;
+  color: var(--input-text);
+  background-color: var(--input-bg);
   font-family: inherit;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .contact-field input::placeholder,
 .contact-field textarea::placeholder {
-  color: #94a3b8;
+  color: var(--input-placeholder);
 }
 
 .contact-field input:focus,
 .contact-field textarea:focus {
-  border-color: #b91c1c;
-  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.08);
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--input-focus-ring);
   outline: none;
 }
 
@@ -197,7 +199,7 @@
 .contact-submit-btn {
   width: 100%;
   padding: 16px 24px;
-  background-color: #b91c1c;
+  background-color: var(--primary);
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -214,7 +216,7 @@
 }
 
 .contact-submit-btn:hover {
-  background-color: #991b1b;
+  background-color: var(--primary-hover);
   transform: translateY(-1px);
 }
 

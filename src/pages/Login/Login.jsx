@@ -1,7 +1,7 @@
-﻿import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { Heart, Eye, EyeOff, AlertCircle, KeyRound } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/useAuth';
+import { Heart, Eye, EyeOff, AlertCircle, KeyRound, Mail, Send, CheckCircle, ArrowRight } from 'lucide-react';
 import './Login.css';
 
 export default function Login() {
@@ -9,30 +9,91 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [unverifiedNotice, setUnverifiedNotice] = useState(null);
+  const [resendStatus, setResendStatus] = useState('');
   const [loading, setLoading] = useState(false);
   const [forgotModal, setForgotModal] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
   const [resetSuccess, setResetSuccess] = useState(false);
 
-  const { login, loginWithGoogle } = useAuth();
+  const { 
+    login, 
+    loginWithGoogle, 
+    resendVerificationEmail, 
+    getCooldownRemaining 
+  } = useAuth();
+
+  const [cooldown, setCooldown] = useState(getCooldownRemaining());
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCooldown(getCooldownRemaining());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [getCooldownRemaining]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (!email || !password) {
+    setUnverifiedNotice(null);
+    setResendStatus('');
+
+    const trimmedEmail = email.trim().toLowerCase();
+    if (!trimmedEmail || !password) {
       setError('Please fill in all required fields.');
       return;
     }
 
     try {
       setLoading(true);
-      await login(email, password);
-      navigate('/dashboard');
+      const res = await login(trimmedEmail, password);
+
+      if (res && res.unverified) {
+        // Block protected dashboard access for unverified account
+        setUnverifiedNotice({
+          email: res.email || trimmedEmail,
+          message: 'Email Verification Required: Please verify your email before logging in.'
+        });
+        return;
+      }
+
+      // Success verified login
+      const targetDestination = location.state?.from?.pathname || '/dashboard';
+      navigate(targetDestination);
     } catch (err) {
-      setError('Invalid credentials. Please check your email and password.');
+      console.warn('Login failure:', err);
+      if (err.code === 'auth/user-not-found' || err.message?.includes('No registered account')) {
+        setError('No account found with this email. Please check your spelling or register.');
+      } else if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+        setError('Incorrect password. Please verify your password or use "Forgot Password".');
+      } else if (err.code === 'auth/invalid-email') {
+        setError('Please enter a valid email address.');
+      } else {
+        setError(err.message || 'Invalid credentials. Please check your email and password.');
+      }
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResend = async () => {
+    if (cooldown > 0) return;
+    const target = unverifiedNotice?.email || email.trim();
+    if (!target) return;
+
+    try {
+      const res = await resendVerificationEmail(target);
+      if (res.success) {
+        setResendStatus(`Verification email resent to ${target}.`);
+        setCooldown(60);
+      } else {
+        setResendStatus(res.message);
+        if (res.cooldownRemaining) setCooldown(res.cooldownRemaining);
+      }
+    } catch (err) {
+      setResendStatus(err.message || 'Could not resend email.');
     }
   };
 
@@ -42,6 +103,7 @@ export default function Login() {
       await loginWithGoogle();
       navigate('/dashboard');
     } catch (err) {
+      console.warn('Google sign in error:', err);
       setError('Google Sign-in failed. Try logging in with email.');
     } finally {
       setLoading(false);
@@ -85,6 +147,44 @@ export default function Login() {
           </div>
         )}
 
+        {/* Unverified Email Warning Alert */}
+        {unverifiedNotice && (
+          <div className="login-unverified-alert">
+            <div className="unverified-alert-top">
+              <Mail size={18} className="unverified-icon" />
+              <strong>{unverifiedNotice.message}</strong>
+            </div>
+            <p className="unverified-alert-desc">
+              A verification link was sent to <strong>{unverifiedNotice.email}</strong>. 
+              Protected access (Dashboard, Donor Search, Requests) is blocked until verified.
+            </p>
+            {resendStatus && (
+              <div className="unverified-resend-status">
+                <CheckCircle size={14} />
+                <span>{resendStatus}</span>
+              </div>
+            )}
+            <div className="unverified-actions-row">
+              <button
+                type="button"
+                className="btn-unverified-resend"
+                onClick={handleResend}
+                disabled={cooldown > 0}
+              >
+                <Send size={14} />
+                {cooldown > 0 ? `Resend (${cooldown}s)` : 'Resend Link'}
+              </button>
+              <button
+                type="button"
+                className="btn-unverified-goto"
+                onClick={() => navigate('/verify-email', { state: { email: unverifiedNotice.email } })}
+              >
+                Verify Page <ArrowRight size={14} />
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Form */}
         <form onSubmit={handleSubmit} className="login-form">
           {/* Email */}
@@ -115,6 +215,7 @@ export default function Login() {
                 className="login-eye-btn"
                 onClick={() => setShowPassword(!showPassword)}
                 tabIndex={-1}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>

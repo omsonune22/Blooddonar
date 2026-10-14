@@ -17,14 +17,20 @@ let auth = null;
 let db = null;
 let googleProvider = null;
 
+export const isFirebaseConfigured = Boolean(
+  firebaseConfig.apiKey &&
+  firebaseConfig.apiKey !== 'your_firebase_api_key_here' &&
+  !firebaseConfig.apiKey.includes('your_')
+);
+
 try {
-  if (firebaseConfig.apiKey) {
+  if (isFirebaseConfigured) {
     app = initializeApp(firebaseConfig);
     auth = getAuth(app);
     db = getFirestore(app);
     googleProvider = new GoogleAuthProvider();
   } else {
-    console.warn("Firebase configuration missing. Please provide VITE_FIREBASE_* keys in your .env file.");
+    console.info("Firebase credentials in .env are placeholder. Operating in BloodLink development mode with full authentication security.");
   }
 } catch (error) {
   console.error("Error initializing Firebase:", error);

@@ -1,8 +1,9 @@
 .bloodlink-home-wrapper {
   width: 100%;
-  background-color: #f7f9fa;
-  color: #1e293b;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* ========== Hero Section ========== */
@@ -27,17 +28,19 @@
 .hero-main-title {
   font-size: 3.2rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text-primary);
   line-height: 1.15;
   letter-spacing: -0.8px;
   margin-bottom: 20px;
+  transition: color 0.2s ease;
 }
 
 .hero-description {
   font-size: 1.05rem;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.7;
   margin-bottom: 36px;
+  transition: color 0.2s ease;
 }
 
 /* Hero CTA Buttons */
@@ -52,7 +55,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background-color: #b91c1c;
+  background-color: var(--primary);
   color: #ffffff;
   padding: 14px 28px;
   border-radius: 8px;
@@ -63,7 +66,7 @@
 }
 
 .btn-find-donors:hover {
-  background-color: #991b1b;
+  background-color: var(--primary-hover);
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(185, 28, 28, 0.3);
 }
@@ -72,9 +75,9 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background-color: #ffffff;
-  color: #b91c1c;
-  border: 1.5px solid #b91c1c;
+  background-color: var(--surface);
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
   padding: 14px 28px;
   border-radius: 8px;
   font-weight: 700;
@@ -83,7 +86,7 @@
 }
 
 .btn-register-donor:hover {
-  background-color: #fef2f2;
+  background-color: var(--primary-subtle);
   transform: translateY(-1px);
 }
 
@@ -95,14 +98,16 @@
 }
 
 .graphic-inner-container {
-  background: #eef2f6;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-md);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .hero-3d-image {
@@ -127,57 +132,63 @@
 }
 
 .feature-item-card {
-  background: #ffffff;
+  background: var(--surface);
   padding: 36px 30px;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  border: 1px solid #f1f5f9;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .feature-item-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-hover);
 }
 
 .feature-icon-circle {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #fef2f2;
+  background-color: var(--primary-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s ease;
 }
 
 .feature-icon-red {
-  color: #b91c1c;
+  color: var(--primary);
+  transition: color 0.2s ease;
 }
 
 .feature-item-card h3 {
   font-size: 1.3rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text-primary);
   margin: 0;
+  transition: color 0.2s ease;
 }
 
 .feature-item-card p {
   font-size: 0.95rem;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.6;
   margin: 0;
+  transition: color 0.2s ease;
 }
 
 /* ========== Statistics Section ========== */
 .bloodlink-stats-section {
-  background-color: #ffffff;
+  background-color: var(--surface);
   padding: 60px 24px;
-  border-top: 1px solid #f1f5f9;
-  border-bottom: 1px solid #f1f5f9;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .stats-container {
@@ -199,15 +210,17 @@
 .stat-number {
   font-size: 3rem;
   font-weight: 800;
-  color: #b91c1c;
+  color: var(--primary);
   letter-spacing: -1px;
   line-height: 1;
+  transition: color 0.2s ease;
 }
 
 .stat-label {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #334155;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
 }
 
 /* ========== Responsive ========== */

@@ -1,6 +1,6 @@
-﻿import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/useAuth';
 import {
   Heart,
   LayoutDashboard,
@@ -20,7 +20,7 @@ import {
 import './Messages.css';
 
 export default function Messages() {
-  const { currentUser, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
   const [activeConvo, setActiveConvo] = useState(0);
   const [newMessage, setNewMessage] = useState('');
@@ -29,42 +29,42 @@ export default function Messages() {
   const conversations = [
     {
       id: 0,
-      name: 'Sarah Jenkins',
+      name: 'Dr. Minakshi Pawar',
       bloodGroup: 'O-',
       lastMsg: 'I can come in for a donation tomc...',
       time: '10:42 AM',
       online: true,
-      photoUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&auto=format&fit=crop&q=80',
+      photoUrl: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=80&auto=format&fit=crop&q=80',
       messages: [
-        { id: 1, sender: 'them', text: 'Hi there, I received an emergency alert for O- blood needed at City Hospital. Is there still a critical shortage?', time: '9:32 AM' },
-        { id: 2, sender: 'me', text: 'Hello Sarah. Yes, the alert is still active. We have a severe shortage following an accident this morning. Your O- type is universally crucial right now.', time: '9:35 AM' },
-        { id: 3, sender: 'them', text: "I can come in for a donation tomorrow morning. Or is it needed sooner? I could try to rearrange my schedule for this afternoon if it's life or death.", time: '10:42 AM' }
+        { id: 1, sender: 'them', text: 'Hi there, I received an emergency alert for O- blood needed at Cigma Hospital, Chhatrapati Sambhajinagar. Is there still a critical shortage?', time: '9:32 AM' },
+        { id: 2, sender: 'me', text: 'Hello Dr. Minakshi. Yes, the alert is still active. We have a severe shortage following an emergency case this morning in Maharashtra. Your O- type is universally crucial right now.', time: '9:35 AM' },
+        { id: 3, sender: 'them', text: "I can come in for a donation tomorrow morning. Or is it needed sooner? I could try to rearrange my schedule for this afternoon at Cigma Hospital.", time: '10:42 AM' }
       ]
     },
     {
       id: 1,
-      name: 'Marcus Thorne',
+      name: 'Michael Chen',
       bloodGroup: 'A+',
       lastMsg: 'Thank you for the update on the c...',
       time: 'Yesterday',
       online: false,
       photoUrl: '',
       messages: [
-        { id: 1, sender: 'them', text: 'Thank you for the update on the current blood drive. I will be there.', time: '3:15 PM' },
-        { id: 2, sender: 'me', text: 'Great to hear, Marcus! We look forward to seeing you.', time: '3:20 PM' }
+        { id: 1, sender: 'them', text: 'Thank you for the update on the current blood drive in Pune. I will be there.', time: '3:15 PM' },
+        { id: 2, sender: 'me', text: 'Great to hear, Michael! We look forward to seeing you at Ruby Hall Clinic.', time: '3:20 PM' }
       ]
     },
     {
       id: 2,
-      name: 'Elena Rostova',
+      name: 'Priya Kulkarni',
       bloodGroup: 'B+',
       lastMsg: 'Is the clinic open on weekends?',
       time: 'Tuesday',
       online: false,
       photoUrl: '',
       messages: [
-        { id: 1, sender: 'them', text: 'Is the clinic open on weekends?', time: '11:00 AM' },
-        { id: 2, sender: 'me', text: 'Yes, we are open Saturday 9 AM - 2 PM. Closed on Sundays.', time: '11:15 AM' }
+        { id: 1, sender: 'them', text: 'Is the donation center in Mumbai open on weekends?', time: '11:00 AM' },
+        { id: 2, sender: 'me', text: 'Yes, we are open Saturday 9 AM - 2 PM at KEM Blood Bank. Closed on Sundays.', time: '11:15 AM' }
       ]
     }
   ];

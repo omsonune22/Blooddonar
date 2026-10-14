@@ -1,5 +1,6 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import MaharashtraMap from '../../components/MaharashtraMap';
 import './ContactUs.css';
 
 export default function ContactUs() {
@@ -29,7 +30,7 @@ export default function ContactUs() {
       <div className="contact-header">
         <h1>Contact Us</h1>
         <p>
-          We're here to help. Reach out with any questions, support requests, or partnership inquiries regarding life-saving blood logistics.
+          We're here to help. Reach out with any questions, support requests, or partnership inquiries regarding life-saving blood logistics across Maharashtra, India.
         </p>
       </div>
 
@@ -47,7 +48,7 @@ export default function ContactUs() {
                 </div>
                 <div>
                   <span className="contact-info-label">Phone</span>
-                  <span className="contact-info-value">+1 800-BLOOD-LINK</span>
+                  <span className="contact-info-value">+91 1800-266-3546</span>
                 </div>
               </div>
 
@@ -67,16 +68,16 @@ export default function ContactUs() {
                 </div>
                 <div>
                   <span className="contact-info-label">Address</span>
-                  <span className="contact-info-value">123 Health Ave, Medical District, NY</span>
+                  <span className="contact-info-value">FC Road, Shivajinagar, Pune, Maharashtra 411005, India</span>
                 </div>
               </div>
             </div>
 
-            {/* Map Embed */}
+            {/* Map Embed - Pune, Maharashtra */}
             <div className="contact-map">
               <iframe
-                title="BloodLink Location"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-74.006%2C40.712%2C-73.97%2C40.730&layer=mapnik&marker=40.721%2C-73.988"
+                title="BloodLink Maharashtra Location"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=73.80%2C18.50%2C73.90%2C18.55&layer=mapnik&marker=18.5204%2C73.8567"
                 width="100%"
                 height="200"
                 style={{ border: 0, borderRadius: '12px' }}
@@ -151,6 +152,9 @@ export default function ContactUs() {
             </form>
           </div>
         </div>
+
+        {/* Dedicated Interactive Maharashtra Map Section */}
+        <MaharashtraMap />
       </div>
     </div>
   );

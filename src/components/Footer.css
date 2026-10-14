@@ -1,7 +1,8 @@
 .bloodlink-footer {
-  background-color: #ffffff;
-  border-top: 1px solid #f1f5f9;
+  background-color: var(--footer-bg);
+  border-top: 1px solid var(--border);
   padding: 24px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .footer-inner-container {
@@ -24,12 +25,13 @@
 .footer-brand-title {
   font-size: 1.25rem;
   font-weight: 800;
-  color: #b91c1c;
+  color: var(--primary);
+  transition: color 0.2s ease;
 }
 
 .footer-copyright {
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .footer-right-links {
@@ -41,10 +43,10 @@
 .footer-right-links a {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-muted);
   transition: color 0.2s ease;
 }
 
 .footer-right-links a:hover {
-  color: #b91c1c;
+  color: var(--primary);
 }

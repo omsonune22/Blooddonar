@@ -1,157 +1,292 @@
-﻿/* ========== My Requests Page ========== */
+/* ==========================================================================
+   MY BLOOD REQUESTS PAGE — BLOODLINK MAHARASHTRA
+   ========================================================================== */
+
 .myreq-page {
-  min-height: 80vh;
-  background-color: #f7f9fa;
-  padding: 40px 24px 60px;
+  min-height: 85vh;
+  background-color: var(--bg);
+  color: var(--text);
+  padding: 40px 24px 80px;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .myreq-container {
-  max-width: 960px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
-/* ========== Header ========== */
+/* Demo Notice Banner */
+.myreq-demo-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 24px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.demo-banner-icon {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* Toast Alert */
+.myreq-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--status-available);
+  box-shadow: var(--shadow-lg);
+  padding: 14px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  z-index: 2100;
+  animation: slideUpToast 0.25s ease-out;
+}
+
+.toast-icon {
+  color: var(--status-available);
+}
+
+@keyframes slideUpToast {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== Header matching reference screenshot ========== */
 .myreq-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   gap: 16px;
   flex-wrap: wrap;
 }
 
-.myreq-header h1 {
-  font-size: 1.75rem;
+.myreq-header-left {
+  flex: 1;
+  min-width: 260px;
+}
+
+.myreq-main-title {
+  font-size: 2.1rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text-primary);
   margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+  transition: color 0.2s ease;
 }
 
-.myreq-header p {
-  font-size: 0.92rem;
-  color: #64748b;
+.myreq-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
   margin: 0;
+  font-weight: 400;
 }
 
+/* + New Request Button */
 .myreq-new-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background-color: #b91c1c;
+  background-color: var(--primary);
   color: #ffffff;
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 700;
   text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.15s ease;
-  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.2);
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(185, 28, 28, 0.25);
   white-space: nowrap;
 }
 
 .myreq-new-btn:hover {
-  background-color: #991b1b;
+  background-color: var(--primary-hover);
   transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(185, 28, 28, 0.35);
 }
 
-/* ========== Tabs ========== */
+/* ========== Status Tabs matching reference screenshot ========== */
+.myreq-tabs-wrapper {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
 .myreq-tabs {
   display: flex;
-  gap: 0;
-  border-bottom: 2px solid #e2e8f0;
-  margin-bottom: 28px;
+  gap: 8px;
+  align-items: center;
+  position: relative;
+  overflow-x: auto;
+  padding-bottom: 0px;
 }
 
 .myreq-tab {
   padding: 10px 20px;
-  background: none;
+  background: transparent;
   border: none;
-  font-size: 0.9rem;
+  border-radius: 8px 8px 0 0;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-muted);
   cursor: pointer;
   position: relative;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .myreq-tab:hover {
-  color: #b91c1c;
+  color: var(--primary);
 }
 
+/* Active tab pill & red bottom indicator */
 .myreq-tab.active {
-  color: #b91c1c;
+  color: var(--primary);
   font-weight: 700;
+  background-color: var(--primary-subtle);
 }
 
 .myreq-tab.active::after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background-color: #b91c1c;
-  border-radius: 2px;
+  height: 2.5px;
+  background-color: var(--primary);
+  border-radius: 2px 2px 0 0;
+}
+
+.myreq-tab-count {
+  margin-left: 6px;
+  font-size: 0.82rem;
+  opacity: 0.8;
+}
+
+/* Loading & Error States */
+.myreq-loading-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 64px 24px;
+  color: var(--text-muted);
+}
+
+.myreq-loading-box .spinner {
+  animation: spin 1s linear infinite;
+  color: var(--primary);
+}
+
+.myreq-error-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 48px 24px;
+  background: var(--status-critical-bg);
+  border: 1px solid var(--primary-subtle-border);
+  border-radius: 12px;
+  color: var(--status-critical-text);
+  text-align: center;
+  margin-bottom: 24px;
 }
 
 /* ========== Cards Grid ========== */
 .myreq-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 24px;
 }
 
+/* Card Container */
 .myreq-card {
-  background: #ffffff;
-  border: 1px solid #f1f5f9;
-  border-radius: 14px;
-  padding: 24px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 26px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-  transition: box-shadow 0.2s ease;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .myreq-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-hover);
 }
 
-/* Card Top */
+/* Red Left-Side Accent for Active Requests */
+.myreq-card.active {
+  border-left: 5px solid var(--primary);
+}
+
+/* Completed and Cancelled Cards have standard thin borders */
+.myreq-card.completed,
+.myreq-card.cancelled {
+  border-left: 1px solid var(--border);
+}
+
+/* Card Top Section */
 .myreq-card-top {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   align-items: flex-start;
 }
 
+/* Blood Group Circular Badge */
 .myreq-blood-badge {
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 1.25rem;
   font-weight: 800;
   flex-shrink: 0;
-  background-color: #f1f5f9;
-  color: #64748b;
-  border: 2px solid #e2e8f0;
+  letter-spacing: -0.5px;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.myreq-blood-badge.urgent {
-  background-color: #fef2f2;
-  color: #b91c1c;
-  border-color: #fecaca;
+.myreq-blood-badge.active {
+  background-color: var(--primary-subtle);
+  color: var(--primary);
+  border: 1px solid var(--primary-subtle-border);
 }
 
+.myreq-blood-badge.neutral {
+  background-color: var(--surface-alt);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+/* Card Info Column */
 .myreq-card-info {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
+/* Status Tag & Date */
 .myreq-card-meta {
   display: flex;
   align-items: center;
@@ -160,140 +295,659 @@
 }
 
 .myreq-status-tag {
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 4px;
   font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
+  display: inline-block;
 }
 
 .myreq-status-tag.active {
-  background-color: #dcfce7;
-  color: #15803d;
+  background-color: var(--status-available-bg);
+  color: var(--status-available-text);
 }
 
 .myreq-status-tag.completed {
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: var(--surface-alt);
+  color: var(--text-secondary);
 }
 
 .myreq-status-tag.cancelled {
-  background-color: #fef2f2;
-  color: #b91c1c;
+  background-color: var(--status-critical-bg);
+  color: var(--status-critical-text);
 }
 
 .myreq-date-text {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.78rem;
-  color: #94a3b8;
+  font-size: 0.8rem;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
-.myreq-hospital-name {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #0f172a;
-  margin: 2px 0 0 0;
+.meta-icon {
+  color: var(--text-muted);
 }
 
+/* Hospital Name */
+.myreq-hospital-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 4px 0 2px 0;
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+/* Location */
 .myreq-location {
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 0.82rem;
-  color: #64748b;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
 }
 
-/* Stats Row */
+.loc-pin-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ========== Stats Container matching reference screenshot ========== */
 .myreq-stats-row {
   display: flex;
-  gap: 28px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+  background-color: var(--card-inner-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin: 18px 0 20px 0;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .myreq-stat {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .myreq-stat-label {
   font-size: 0.68rem;
-  font-weight: 700;
-  color: #94a3b8;
+  font-weight: 800;
+  color: var(--text-muted);
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 
-.myreq-stat-value {
-  font-size: 0.92rem;
-  color: #475569;
-  font-weight: 500;
+.myreq-stat-val-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
 }
 
-.myreq-stat-value strong {
-  font-size: 1.3rem;
+.stat-big-num {
+  font-size: 1.45rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text-primary);
+  line-height: 1.1;
 }
 
-/* Actions */
+.stat-big-num.highlight-red {
+  color: var(--primary);
+}
+
+.stat-unit-text {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ========== Action Buttons matching reference screenshot ========== */
 .myreq-card-actions {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
 }
 
+/* Solid Red Primary Button */
 .myreq-btn-primary {
   flex: 1;
-  padding: 10px 16px;
-  background-color: #b91c1c;
+  padding: 11px 16px;
+  background-color: var(--primary);
   color: #ffffff;
   border: none;
   border-radius: 8px;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  text-align: center;
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .myreq-btn-primary:hover {
-  background-color: #991b1b;
+  background-color: var(--primary-hover);
 }
 
+/* Outline Button */
 .myreq-btn-outline {
   flex: 1;
-  padding: 10px 16px;
-  background-color: #ffffff;
-  color: #b91c1c;
-  border: 1.5px solid #b91c1c;
+  padding: 11px 16px;
+  background-color: var(--surface);
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
   border-radius: 8px;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 700;
   cursor: pointer;
+  text-align: center;
   transition: all 0.15s ease;
 }
 
 .myreq-btn-outline:hover {
-  background-color: #fef2f2;
+  background-color: var(--primary-subtle);
 }
 
+/* Full Width Outline for Completed / Cancelled */
 .myreq-btn-outline.full-width {
+  width: 100%;
+  color: var(--text);
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+}
+
+.myreq-btn-outline.full-width:hover {
+  background-color: var(--surface-alt);
+  border-color: var(--border-hover);
+  color: var(--primary);
+}
+
+/* Empty State */
+.myreq-empty-state {
+  text-align: center;
+  padding: 64px 24px;
+  background-color: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.empty-state-icon {
+  color: var(--primary);
+  opacity: 0.8;
+}
+
+.myreq-empty-state h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.myreq-empty-state p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 0 8px 0;
+}
+
+/* ==========================================================================
+   MODALS (Details, Cancel Confirmation, Summary)
+   ========================================================================== */
+
+.myreq-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--modal-backdrop);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 24px;
+  animation: fadeInModal 0.2s ease-out;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.myreq-modal {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 580px;
+  box-shadow: var(--shadow-modal);
+  overflow: hidden;
+  animation: scaleUpModal 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scaleUpModal {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.myreq-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.modal-blood-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  background-color: var(--surface-alt);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.modal-blood-badge.active {
+  background-color: var(--primary-subtle);
+  color: var(--primary);
+  border-color: var(--primary-subtle-border);
+}
+
+.myreq-modal-header h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.modal-sub-hospital {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: var(--surface-alt);
+  color: var(--text-primary);
+}
+
+.myreq-modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.modal-notice-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--primary-subtle);
+  color: var(--primary);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* Modal Info Grid */
+.modal-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.modal-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-detail-item.full-span {
+  grid-column: span 2;
+}
+
+.detail-item-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-item-val {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.detail-item-val.location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+}
+
+.detail-notes-box {
+  background-color: var(--card-inner-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.myreq-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  background-color: var(--card-inner-bg);
+}
+
+.modal-btn-close {
+  padding: 10px 20px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.modal-btn-close:hover {
+  background-color: var(--surface-alt);
+}
+
+.modal-btn-close.full-width {
   width: 100%;
 }
 
-/* ========== Responsive ========== */
-@media (max-width: 768px) {
+.modal-btn-cancel-req {
+  padding: 10px 20px;
+  background-color: var(--status-critical-bg);
+  border: 1px solid var(--primary-subtle-border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.modal-btn-cancel-req:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+/* ========== Cancel Dialog Specifics ========== */
+.myreq-modal.cancel-dialog {
+  max-width: 460px;
+  padding: 32px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cancel-dialog-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--status-critical-bg);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.cancel-dialog-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 10px 0;
+}
+
+.cancel-dialog-text {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+}
+
+.cancel-dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.btn-dialog-keep {
+  flex: 1;
+  padding: 12px 18px;
+  background-color: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-dialog-keep:hover {
+  background-color: var(--surface-hover);
+}
+
+.btn-dialog-confirm {
+  flex: 1;
+  padding: 12px 18px;
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-dialog-confirm:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ========== Summary Modal Specifics ========== */
+.summary-check-icon {
+  color: var(--status-available);
+}
+
+.summary-success-banner {
+  background-color: var(--status-available-bg);
+  color: var(--status-available-text);
+  border: 1px solid var(--status-available);
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+
+.summary-success-banner h4 {
+  margin: 0 0 4px 0;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.summary-success-banner p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.95;
+}
+
+.summary-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.summary-stat-box {
+  background-color: var(--card-inner-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-stat-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.summary-stat-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.summary-stat-val.red {
+  color: var(--primary);
+}
+
+.summary-hospital-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background-color: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.summary-hospital-info strong {
+  display: block;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+}
+
+.summary-hospital-info p {
+  margin: 2px 0 0 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT
+   ========================================================================== */
+
+@media (max-width: 900px) {
   .myreq-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .myreq-page {
+    padding: 24px 16px 60px;
   }
 
   .myreq-header {
     flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
   }
 
-  .myreq-tabs {
-    overflow-x: auto;
+  .myreq-main-title {
+    font-size: 1.75rem;
+  }
+
+  .myreq-new-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .myreq-card {
+    padding: 20px 18px;
+  }
+
+  .myreq-card-top {
+    gap: 14px;
+  }
+
+  .myreq-blood-badge {
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
+  }
+
+  .myreq-hospital-name {
+    font-size: 1.05rem;
+  }
+
+  .myreq-stats-row {
+    gap: 24px;
+    padding: 12px 14px;
+  }
+
+  .modal-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-detail-item.full-span {
+    grid-column: span 1;
+  }
+
+  .cancel-dialog-actions {
+    flex-direction: column-reverse;
+  }
+
+  .btn-dialog-keep,
+  .btn-dialog-confirm {
+    width: 100%;
   }
 }

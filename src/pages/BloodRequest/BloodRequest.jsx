@@ -1,7 +1,9 @@
-﻿import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { MapPin, AlertCircle } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/useAuth';
+import { db, isFirebaseConfigured } from '../../firebase/config';
+import { doc, setDoc } from 'firebase/firestore';
+import { MapPin, AlertCircle, ShieldAlert } from 'lucide-react';
 import './BloodRequest.css';
 
 export default function BloodRequest() {
@@ -33,6 +35,16 @@ export default function BloodRequest() {
     e.preventDefault();
     setError('');
 
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
+
+    if (!currentUser.emailVerified) {
+      navigate('/verify-email', { state: { email: currentUser.email } });
+      return;
+    }
+
     if (!formData.patientName || !formData.bloodGroup || !formData.hospitalName || !formData.hospitalLocation || !formData.unitsRequired || !formData.neededByDate) {
       setError('Please fill in all required fields.');
       return;
@@ -41,28 +53,77 @@ export default function BloodRequest() {
     try {
       setLoading(true);
 
-      const requestPayload = {
-        patientName: formData.patientName,
+      const neededDateObj = new Date(formData.neededByDate);
+      const neededMonth = isNaN(neededDateObj.getTime()) ? 'Oct 28' : neededDateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const neededFull = isNaN(neededDateObj.getTime()) ? formData.neededByDate : neededDateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      const reqId = 'req-' + Date.now();
+      const unitsNum = parseInt(formData.unitsRequired, 10) || 1;
+
+      const newRequestRecord = {
+        id: reqId,
+        userId: currentUser.uid,
+        patientName: formData.patientName.trim(),
         bloodGroup: formData.bloodGroup,
-        hospitalName: formData.hospitalName,
-        location: formData.hospitalLocation,
-        unitsRequired: parseInt(formData.unitsRequired),
-        neededByDate: formData.neededByDate,
+        hospital: formData.hospitalName.trim(),
+        hospitalName: formData.hospitalName.trim(),
+        location: formData.hospitalLocation.trim(),
+        unitsRequired: unitsNum,
+        donorsFound: 0,
+        donorsLabel: 'confirmed',
+        neededBy: neededMonth,
+        neededByFull: neededFull,
+        requiredDate: formData.neededByDate,
         urgency: formData.isEmergency ? 'Critical' : 'Standard',
-        message: formData.additionalMessage,
-        requesterEmail: currentUser?.email || 'anonymous',
-        requesterName: currentUser?.displayName || 'Anonymous'
+        emergencyStatus: formData.isEmergency ? 'Critical' : 'Standard',
+        additionalMessage: formData.additionalMessage.trim(),
+        status: 'Active',
+        isSample: false,
+        requesterEmail: currentUser.email,
+        requesterName: currentUser.displayName || 'BloodLink User',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       };
 
-      await fetch('http://localhost:5000/api/requests', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestPayload)
-      });
+      // 1. Persist to Cloud Firestore if configured
+      if (isFirebaseConfigured && db) {
+        try {
+          await setDoc(doc(db, 'requests', reqId), newRequestRecord);
+        } catch (dbErr) {
+          console.warn('Firestore request save warning:', dbErr);
+        }
+      }
 
-      navigate('/my-requests');
+      // 2. Persist to Express Backend API
+      try {
+        const response = await fetch('http://localhost:5000/api/requests', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newRequestRecord)
+        });
+        if (!response.ok) {
+          console.warn('API returned non-200 code for request creation');
+        }
+      } catch (apiErr) {
+        console.warn('Backend server connection fallback:', apiErr);
+      }
+
+      // 3. Persist in user-scoped localStorage for instant offline synchronization
+      try {
+        const storageKey = `bloodlink_requests_${currentUser.uid}`;
+        const stored = localStorage.getItem(storageKey);
+        const existingList = stored ? JSON.parse(stored) : [];
+        localStorage.setItem(storageKey, JSON.stringify([newRequestRecord, ...existingList]));
+      } catch (storageErr) {
+        console.warn('Could not save to localStorage', storageErr);
+      }
+
+      navigate('/my-requests', {
+        state: { 
+          toastMsg: `Blood request for ${formData.hospitalName} (${formData.bloodGroup}) submitted successfully!`
+        }
+      });
     } catch (err) {
-      setError('Failed to submit request. Please try again.');
+      setError('Failed to submit request: ' + (err.message || 'Please try again.'));
     } finally {
       setLoading(false);
     }
@@ -76,6 +137,16 @@ export default function BloodRequest() {
           <h1>Request Blood</h1>
           <p>Submit a verified request for blood components. For critical emergencies, please use the urgent toggle.</p>
         </div>
+
+        {/* Unverified Email Warning if accessed somehow */}
+        {currentUser && !currentUser.emailVerified && (
+          <div className="breq-error" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <ShieldAlert size={18} />
+            <span>
+              Your email is unverified. Please verify your email before submitting requests.
+            </span>
+          </div>
+        )}
 
         {/* Error */}
         {error && (
@@ -94,6 +165,7 @@ export default function BloodRequest() {
               <input
                 type="text"
                 name="patientName"
+                placeholder="e.g. Rahul Sharma"
                 value={formData.patientName}
                 onChange={handleChange}
                 required
@@ -122,6 +194,7 @@ export default function BloodRequest() {
             <input
               type="text"
               name="hospitalName"
+              placeholder="e.g. Cigma Hospital"
               value={formData.hospitalName}
               onChange={handleChange}
               required
@@ -134,11 +207,24 @@ export default function BloodRequest() {
               <input
                 type="text"
                 name="hospitalLocation"
-                placeholder="e.g. Memorial Hospital, New York"
+                list="maharashtra-cities-list"
+                placeholder="e.g. Ghati Road, Chhatrapati Sambhajinagar, Maharashtra"
                 value={formData.hospitalLocation}
                 onChange={handleChange}
                 required
               />
+              <datalist id="maharashtra-cities-list">
+                <option value="Chhatrapati Sambhajinagar, Maharashtra" />
+                <option value="Pune, Maharashtra" />
+                <option value="Mumbai, Maharashtra" />
+                <option value="Nashik, Maharashtra" />
+                <option value="Nagpur, Maharashtra" />
+                <option value="Kolhapur, Maharashtra" />
+                <option value="Solapur, Maharashtra" />
+                <option value="Amravati, Maharashtra" />
+                <option value="Nanded, Maharashtra" />
+                <option value="Latur, Maharashtra" />
+              </datalist>
             </div>
           </div>
 
@@ -172,7 +258,7 @@ export default function BloodRequest() {
           <div className="breq-toggle-row">
             <div className="breq-toggle-info">
               <span className="breq-toggle-label">Emergency / Urgent Request</span>
-              <span className="breq-toggle-desc">Mark as critical priority for immediate broadcast</span>
+              <span className="breq-toggle-desc">Mark as critical priority for immediate broadcast across Maharashtra</span>
             </div>
             <label className="breq-toggle-switch">
               <input

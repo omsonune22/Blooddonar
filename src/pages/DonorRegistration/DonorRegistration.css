@@ -5,17 +5,20 @@
   align-items: center;
   justify-content: center;
   padding: 48px 24px;
-  background-color: #f7f9fa;
+  background-color: var(--bg);
+  transition: background-color 0.2s ease;
 }
 
 /* ========== Card Container ========== */
 .donor-reg-card {
   width: 100%;
   max-width: 620px;
-  background: #ffffff;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-card);
   padding: 48px 40px;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* ========== Header ========== */
@@ -28,25 +31,29 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background-color: #fef2f2;
+  background-color: var(--primary-subtle);
+  color: var(--primary);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
+  transition: background-color 0.2s ease;
 }
 
 .donor-reg-title {
   font-size: 1.85rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text-primary);
   margin: 0 0 8px 0;
+  transition: color 0.2s ease;
 }
 
 .donor-reg-subtitle {
   font-size: 0.95rem;
-  color: #64748b;
+  color: var(--text-muted);
   margin: 0;
   line-height: 1.5;
+  transition: color 0.2s ease;
 }
 
 /* ========== Error Alert ========== */
@@ -54,11 +61,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
+  background-color: var(--status-critical-bg);
+  border: 1px solid var(--primary-subtle-border);
   border-radius: 10px;
   padding: 12px 16px;
-  color: #b91c1c;
+  color: var(--status-critical-text);
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 24px;
@@ -92,7 +99,8 @@
 .donor-reg-field label {
   font-size: 0.88rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text);
+  transition: color 0.2s ease;
 }
 
 /* Input / Select Shared Styles */
@@ -101,25 +109,25 @@
 .donor-reg-field textarea {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--input-border);
   border-radius: 8px;
   font-size: 0.92rem;
-  color: #1e293b;
-  background-color: #ffffff;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color: var(--input-text);
+  background-color: var(--input-bg);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   font-family: inherit;
 }
 
 .donor-reg-field input::placeholder,
 .donor-reg-field textarea::placeholder {
-  color: #94a3b8;
+  color: var(--input-placeholder);
 }
 
 .donor-reg-field input:focus,
 .donor-reg-field select:focus,
 .donor-reg-field textarea:focus {
-  border-color: #b91c1c;
-  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.08);
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--input-focus-ring);
   outline: none;
 }
 
@@ -148,23 +156,23 @@
   width: 100%;
   padding: 12px 14px;
   padding-right: 44px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--input-border);
   border-radius: 8px;
   font-size: 0.92rem;
-  color: #1e293b;
-  background-color: #ffffff;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color: var(--input-text);
+  background-color: var(--input-bg);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   font-family: inherit;
 }
 
 .password-input-wrap input:focus {
-  border-color: #b91c1c;
-  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.08);
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--input-focus-ring);
   outline: none;
 }
 
 .password-input-wrap input::placeholder {
-  color: #94a3b8;
+  color: var(--input-placeholder);
 }
 
 .password-toggle-btn {
@@ -175,7 +183,7 @@
   background: none;
   border: none;
   padding: 0;
-  color: #94a3b8;
+  color: var(--text-muted);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -183,7 +191,7 @@
 }
 
 .password-toggle-btn:hover {
-  color: #64748b;
+  color: var(--text);
 }
 
 /* ========== Toggle Switch Row ========== */
@@ -192,7 +200,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 0;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--border);
   gap: 16px;
 }
 
@@ -206,7 +214,8 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: #fef2f2;
+  background-color: var(--primary-subtle);
+  color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -217,13 +226,13 @@
   display: block;
   font-size: 0.92rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
 .toggle-desc-text {
   display: block;
   font-size: 0.82rem;
-  color: #64748b;
+  color: var(--text-muted);
   margin-top: 2px;
 }
 
@@ -249,7 +258,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #cbd5e1;
+  background-color: var(--border);
   border-radius: 26px;
   transition: background-color 0.3s ease;
 }
@@ -268,7 +277,7 @@
 }
 
 .toggle-switch input:checked + .toggle-slider {
-  background-color: #b91c1c;
+  background-color: var(--primary);
 }
 
 .toggle-switch input:checked + .toggle-slider::before {
@@ -279,7 +288,7 @@
 .donor-reg-submit-btn {
   width: 100%;
   padding: 16px 24px;
-  background-color: #b91c1c;
+  background-color: var(--primary);
   color: #ffffff;
   border: none;
   border-radius: 50px;
@@ -296,7 +305,7 @@
 }
 
 .donor-reg-submit-btn:hover {
-  background-color: #991b1b;
+  background-color: var(--primary-hover);
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(185, 28, 28, 0.35);
 }
@@ -316,18 +325,151 @@
 
 .donor-reg-footer p {
   font-size: 0.9rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .donor-reg-login-link {
-  color: #b91c1c;
+  color: var(--primary);
   font-weight: 700;
   transition: color 0.2s ease;
 }
 
 .donor-reg-login-link:hover {
-  color: #991b1b;
+  color: var(--primary-hover);
   text-decoration: underline;
+}
+
+/* ========== Verification Sent Success State ========== */
+.donor-reg-verif-success {
+  text-align: center;
+}
+
+.verif-sent-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 16px auto;
+}
+
+.donor-reg-verif-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: rgba(22, 163, 74, 0.12);
+  border: 1px solid rgba(22, 163, 74, 0.35);
+  border-radius: 10px;
+  padding: 14px 18px;
+  color: #16a34a;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.verif-check-icon {
+  flex-shrink: 0;
+}
+
+.donor-reg-verif-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.verif-email-tag {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--text-primary);
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+}
+
+.donor-reg-security-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: var(--primary-subtle);
+  border: 1px solid var(--primary-subtle-border);
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: left;
+  line-height: 1.45;
+  margin-bottom: 24px;
+}
+
+.donor-reg-resend-status {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.donor-reg-verif-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.donor-reg-resend-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.donor-reg-resend-btn:hover:not(:disabled) {
+  background-color: var(--surface-card);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.donor-reg-resend-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.donor-reg-sim-btn {
+  width: 100%;
+  padding: 10px 16px;
+  background-color: rgba(22, 163, 74, 0.08);
+  color: #16a34a;
+  border: 1px dashed rgba(22, 163, 74, 0.4);
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.donor-reg-sim-btn:hover {
+  background-color: rgba(22, 163, 74, 0.16);
+}
+
+.spin-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* ========== Responsive ========== */
